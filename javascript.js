@@ -3,6 +3,8 @@ const div2 = document.querySelector(".top2");
 const div3 = document.querySelector(".maindiv3");
 const nextbtn = document.querySelector(".nextbtn");
 const backbtn = document.querySelector(".Backbtn");
+
+// iyvgyigv
 const nameit = document.querySelector(".in1");
 const sal = document.querySelector(".salin");
 const ed = document.querySelector(".eid");
@@ -11,13 +13,37 @@ const department = document.querySelector(".depat");
 const dob = document.querySelector(".date");
 const exp = document.querySelector(".expi");
 
+function containsOnlyALpha(str) {
+  var regex = /^[A-Za-z .]+$/;
+  return regex.test(str);
+}
+
+function isDateAtLeast18YearsAgo(dateString) {
+  var inputDate = new Date(dateString);
+
+  var currentDate = new Date();
+
+  var eighteenYearsAgoDate = new Date();
+  eighteenYearsAgoDate.setFullYear(currentDate.getFullYear() - 18);
+
+  return inputDate <= eighteenYearsAgoDate;
+}
+
 div1.classList.remove("hide");
 nextbtn.addEventListener("click", (event) => {
   event.preventDefault();
   if (nameit.value != "" && dob.value != "" && ed.value != "") {
-    console.log("Forms 2");
-    div1.classList.add("hide");
-    div2.classList.remove("hide");
+    if (containsOnlyALpha(nameit.value) && isDateAtLeast18YearsAgo(dob.value)) {
+      console.log("Forms 2");
+      div1.classList.add("hide");
+      div2.classList.remove("hide");
+    } else {
+      if (!containsOnlyALpha(nameit.value)) {
+        alert("Enter a proper name");
+      } else {
+        alert("The dob entered doesn't seems to be legit");
+      }
+    }
   } else {
     alert("All fields are to be filled");
   }
@@ -62,66 +88,76 @@ document
   .querySelector(".submitbtn")
   .addEventListener("click", function (event) {
     event.preventDefault();
-    console.log(nameit.value);
-    console.log(sal.value);
-    console.log(ed.value);
-    console.log(des.value);
-    console.log(department.value);
-    console.log(dob.value);
-    console.log(exp.value);
+    if (des.value != "" && sal.value != "" && exp.value != "") {
+      if (!containsOnlyALpha(des.value)) {
+        alert("Enter a proper designation");
+      } else {
+        console.log(nameit.value);
+        console.log(sal.value);
+        console.log(ed.value);
+        console.log(des.value);
+        console.log(department.value);
+        console.log(dob.value);
+        console.log(exp.value);
 
-    const requestData1 = {
-      name: nameit.value,
-      depart: department.value,
-      dob: dob.value,
-      eid: ed.value,
-      sal: sal.value,
-      exp: exp.value,
-      des: des.value,
-    };
+        const requestData1 = {
+          name: nameit.value,
+          depart: department.value,
+          dob: dob.value,
+          eid: ed.value,
+          sal: sal.value,
+          exp: exp.value,
+          des: des.value,
+        };
 
-    async function postData(
-      url = "https://emp-backend-78rl.onrender.com/api/v1/tasks/postone",
-      data = requestData1
-    ) {
-      try {
-        const response = await fetch(url, {
-          method: "POST",
-          mode: "cors",
-          cache: "no-cache",
-          credentials: "same-origin",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          redirect: "follow",
-          referrerPolicy: "no-referrer",
-          body: JSON.stringify(data),
-        });
+        async function postData(
+          url = "https://emp-backend-78rl.onrender.com/api/v1/tasks/postone",
+          data = requestData1
+        ) {
+          try {
+            const response = await fetch(url, {
+              method: "POST",
+              mode: "cors",
+              cache: "no-cache",
+              credentials: "same-origin",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              redirect: "follow",
+              referrerPolicy: "no-referrer",
+              body: JSON.stringify(data),
+            });
 
-        if (!response.ok) {
-          throw new Error("Failed to add data. Please try again.");
+            if (!response.ok) {
+              throw new Error("Failed to add data. Please try again.");
+            }
+
+            const responseData = await response.json();
+            console.log(responseData.msg);
+
+            if (responseData.msg === "Success") {
+              console.log("Success on time");
+              alert("Your data is added");
+              div2.classList.add("hide");
+              div3.classList.remove("hide");
+              functionalityofdisplay();
+            } else {
+              alert(responseData.msg);
+            }
+          } catch (error) {
+            console.error("Error:", error.message);
+            alert(
+              "An error occurred while adding data. Please try again later."
+            );
+          }
         }
 
-        const responseData = await response.json();
-        console.log(responseData.msg);
-
-        if (responseData.msg === "Success") {
-          console.log("Success on time");
-          alert("Your data is added");
-          div2.classList.add("hide");
-          div3.classList.remove("hide");
-          functionalityofdisplay();
-        } else {
-          alert(responseData.msg);
-        }
-      } catch (error) {
-        console.error("Error:", error.message);
-        alert("An error occurred while adding data. Please try again later.");
+        console.log("east");
+        postData();
       }
+    } else {
+      alert("Fill all fields");
     }
-
-    console.log("east");
-    postData();
   });
 backbtn.addEventListener("click", (event) => {
   div3.classList.add("hide");
