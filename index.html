@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="stylesheet.css" />
   </head>
   <body>
-    <div class="top1 hide">
+    <div class="top1">
       <div class="maindiv1">
         <div class="title">
           <h2 style="font-family: Verdana, Geneva, Tahoma, sans-serif">
@@ -172,6 +172,7 @@
     <div class="maindiv3 hide">
       <div class="nav">
         <button class="Backbtn">Back</button>
+        <button class="genidcard">Generate ID Card</button>
         <div class="text">
           <h2 style="margin-right: 700px">Employee details</h2>
         </div>
@@ -239,7 +240,26 @@
         </table>
       </div>
     </div>
+    <!-- aliubgiugfiugsdugfiusdgu======ID card -->
+    <div class="idcarddiv">
+      <div id="employeeCard">
+        <span id="empNameLabel" style="font-weight: bold">EMP name:</span>
+        <span id="empNameSpan">Example</span><br />
+        <span id="designationLabel" style="font-weight: bold"
+          >Designation:</span
+        >
+        <span id="designationSpan">Example</span><br />
+        <span id="employeeIdLabel" style="font-weight: bold">Employee ID:</span>
+        <span id="employeeIdSpan">Example</span><br />
+        <span id="dobLabel" style="font-weight: bold">DOB:</span>
+        <span id="dobSpan">Example</span><br />
+        <span id="departmentLabel" style="font-weight: bold">Department:</span>
+        <span id="departmentSpan">Example</span>
+      </div>
 
+      <button class="idcardgenbtn">Download Employee ID Card</button>
+      <button class="idbackbtn idcardgenbtn">Back</button>
+    </div>
     <script src="javascript.js"></script>
   </body>
 </html>
