@@ -38,3 +38,6 @@ td {
   border-radius: 6px;
   margin: 15px;
 }
+.hide {
+  display: none;
+}

@@ -20,8 +20,9 @@
   align-items: center;
 }
 .maindiv1 {
-  width: 480px;
+  /* width: 480px; */
   /* height: 600px; */
+  padding: 30px;
   overflow: auto;
   border-radius: 12px;
   justify-content: space-evenly;
@@ -29,8 +30,9 @@
   background-color: rgb(210, 242, 255);
 }
 .maindiv2 {
-  width: 480px;
+  /* width: 480px; */
   /* height: 600px; */
+  padding: 30px;
   overflow: auto;
   border-radius: 12px;
   justify-content: space-evenly;

@@ -13,6 +13,8 @@ const department = document.querySelector(".depat");
 const dob = document.querySelector(".date");
 const exp = document.querySelector(".expi");
 
+div1.classList.remove("hide");
+
 function containsOnlyALpha(str) {
   var regex = /^[A-Za-z .]+$/;
   return regex.test(str);
